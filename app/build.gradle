@@ -1,0 +1,86 @@
+
+plugins {
+    id 'com.android.application'
+    
+}
+def srcDirs = [
+  
+  
+  'main',
+  'ui/home',
+  'ui/dashboard',
+  'ui/notifications'        
+ 
+]
+android {
+    namespace 'com.example.myapplication'
+    compileSdk 36
+    
+    
+    defaultConfig {
+        applicationId "com.example.myapplication"
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+        
+        vectorDrawables { 
+            useSupportLibrary true
+        }
+        
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    
+    buildFeatures {
+        viewBinding true
+        
+    }
+    sourceSets {
+    main {
+      manifest.srcFile 'java/com/example/myapplication/AndroidManifest.xml'
+      java.srcDir 'java'
+      java.includes = srcDirs.collect {
+        'com/example/myapplication/' + it + '/**/*.java'
+      }
+      java.excludes = [
+        '**/build/**',
+      ]
+      kotlin.srcDir 'java'
+      kotlin.includes = srcDirs.collect {
+        'com/example/myapplication/' + it + '/**/*.kt'
+      }
+      kotlin.excludes = [
+        '**/build/**',
+      ]
+      res.srcDirs = ['java/com/example/myapplication/res']
+      srcDirs.forEach {
+        res.srcDirs += 'java/com/example/myapplication/' + it + '/res'
+      }
+    }
+    
+}
+}
+
+dependencies {
+
+
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.10.0")
+    implementation("com.google.android.material:material:1.14.0-alpha08")
+    implementation("androidx.navigation:navigation-fragment:2.9.6")
+    implementation("androidx.navigation:navigation-ui:2.9.6")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
+    implementation("androidx.lifecycle:lifecycle-livedata:2.10.0")
+}
