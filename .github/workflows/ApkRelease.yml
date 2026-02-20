@@ -29,4 +29,4 @@ jobs:
       with:
         files: app/build/outputs/apk/release/*.apk
         generate_release_notes: true
-        token: ${{ secrets.RELEASE_TOKEN }}  # Use PAT instead of GITHUB_TOKEN
+        token: ${{ secrets.GITHUB_TOKEN }}  # Use PAT instead of GITHUB_TOKEN
